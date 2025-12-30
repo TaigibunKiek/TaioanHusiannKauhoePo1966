@@ -75,8 +75,9 @@
   </footer>
 </body>
 <script>
+  {% if site.github %} {% assign baseUrl = "/" | append: site.github.repository_name %} {% else %} {% assign baseUrl = site.baseurl %} {% endif %}
   window.JEKYLL_CONFIG = {
-    baseUrl: "{{ site.baseurl }}"
+    baseUrl: "{{ baseUrl }}"
   };
 </script>
 <script src="{{ " /assets/javascripts/openseadragon.min.js" | relative_url }}"></script>

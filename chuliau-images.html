@@ -2,19 +2,22 @@
 layout: null
 permalink: /chuliau/images.json
 ---
+{%- if site.github -%}
+{%- assign baseUrl = "/" | append: site.github.repository_name -%}
+{%- else -%}
+{%- assign baseUrl = site.baseurl -%}
+{%- endif -%}
 {
-  "baseUrl": "{{ site.baseurl }}",
-  "folder": "/chuliau",
-  "images": [
-{% assign first = true %}
-{% for file in site.static_files %}
-{% if file.path contains '/chuliau/' %}
-{% if file.extname == '.jpg' %}
-{% if first == false %},{% endif %}
-    "{{ file.name }}"
-{% assign first = false %}
-{% endif %}
-{% endif %}
-{% endfor %}
-  ]
+"baseUrl": "{{ baseUrl }}",
+"folder": "/chuliau",
+"images": [
+{%- assign first = true -%}
+{%- for file in site.static_files -%}
+{%- if file.path contains '/chuliau/' and file.extname == '.jpg' -%}
+{%- unless first -%},{%- endunless -%}
+"{{ file.name }}"
+{%- assign first = false -%}
+{%- endif -%}
+{%- endfor -%}
+]
 }
